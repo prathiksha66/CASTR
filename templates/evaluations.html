@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Evaluations | CASTR{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <p class="eyebrow">CASTING EVALUATION</p>
+    <h1>Audition Evaluations</h1>
+    <p>Score audition performances and make final casting decisions.</p>
+</section>
+
+<div class="ranking-panel">
+
+    <div class="ranking-title">
+        <div>
+            <p class="eyebrow">EVALUATION DATABASE</p>
+            <h2>Candidate Performance</h2>
+        </div>
+    </div>
+
+    {% for audition in auditions %}
+
+    <div class="candidate-card">
+
+        <div class="rank">
+            #{{ loop.index }}
+        </div>
+
+        <div class="candidate-info">
+
+            <h2>{{ audition.actor_name }}</h2>
+
+            <p>
+                {{ audition.role_name }}
+                • {{ audition.production_name }}
+            </p>
+
+            {% if audition.evaluation %}
+
+            <div class="score-details">
+                <span>Acting: {{ audition.evaluation.acting }}/10</span>
+                <span>Expression: {{ audition.evaluation.expression }}/10</span>
+                <span>Dialogue: {{ audition.evaluation.dialogue }}/10</span>
+                <span>Confidence: {{ audition.evaluation.confidence }}/10</span>
+                <span>Total: {{ audition.evaluation.total }}/40</span>
+            </div>
+
+            <h3 class="status-text">
+                Decision: {{ audition.evaluation.decision }}
+            </h3>
+
+            {% else %}
+
+            <form
+                action="/evaluate/{{ audition._id }}"
+                method="POST">
+
+                <div class="evaluation-form">
+
+                    <input
+                        type="number"
+                        name="acting"
+                        min="0"
+                        max="10"
+                        placeholder="Acting /10"
+                        required>
+
+                    <input
+                        type="number"
+                        name="expression"
+                        min="0"
+                        max="10"
+                        placeholder="Expression /10"
+                        required>
+
+                    <input
+                        type="number"
+                        name="dialogue"
+                        min="0"
+                        max="10"
+                        placeholder="Dialogue /10"
+                        required>
+
+                    <input
+                        type="number"
+                        name="confidence"
+                        min="0"
+                        max="10"
+                        placeholder="Confidence /10"
+                        required>
+
+                    <button
+                        type="submit"
+                        class="small-green-button">
+                        Submit Evaluation
+                    </button>
+
+                </div>
+
+            </form>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

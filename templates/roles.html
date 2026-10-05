@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}
+Roles | CASTR
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+
+    <p class="eyebrow">
+        CASTING OPPORTUNITIES
+    </p>
+
+    <h1>Open Roles</h1>
+
+    <p>
+        Explore current casting requirements
+        and discover matching talent.
+    </p>
+
+</section>
+
+
+<div class="role-grid">
+
+{% for role in roles %}
+
+    <div class="role-card">
+
+        <div class="role-status">
+            {{ role.status }}
+        </div>
+
+        <p class="production-name">
+            {{ role.production_name }}
+        </p>
+
+        <h2>
+            {{ role.role_name }}
+        </h2>
+
+        <p class="role-description">
+            {{ role.description }}
+        </p>
+
+
+        <div class="role-info">
+
+            <span>
+                Ages {{ role.age_min }}–{{ role.age_max }}
+            </span>
+
+            <span>
+                {{ role.gender }}
+            </span>
+
+            <span>
+                {{ role.location }}
+            </span>
+
+        </div>
+
+
+        <h4>Required Skills</h4>
+
+        <div class="tags">
+
+        {% for skill in role.required_skills %}
+
+            <span>
+                {{ skill.name }}
+            </span>
+
+        {% endfor %}
+
+        </div>
+
+
+        <a href="/matches/{{ role._id }}"
+           class="match-button">
+
+            Find Best Matches →
+
+        </a>
+
+    </div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Auditions | CASTR{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <p class="eyebrow">AUDITION MANAGEMENT</p>
+    <h1>Auditions</h1>
+    <p>Schedule and manage auditions for shortlisted candidates.</p>
+</section>
+
+<div class="ranking-panel">
+
+    <div class="ranking-title">
+        <div>
+            <p class="eyebrow">AUDITION DATABASE</p>
+            <h2>Scheduled Auditions</h2>
+        </div>
+
+        <span>{{ auditions|length }} auditions</span>
+    </div>
+
+    {% for audition in auditions %}
+
+    <div class="candidate-card">
+
+        <div class="rank">
+            #{{ loop.index }}
+        </div>
+
+        <div class="candidate-info">
+
+            <h2>{{ audition.actor_name }}</h2>
+
+            <p>
+                Auditioning for
+                <strong>{{ audition.role_name }}</strong>
+                • {{ audition.production_name }}
+            </p>
+
+            <div class="score-details">
+                <span>📅 {{ audition.date }}</span>
+                <span>⏰ {{ audition.time }}</span>
+                <span>📍 {{ audition.venue }}</span>
+                <span>{{ audition.round }}</span>
+                <span>Status: {{ audition.status }}</span>
+            </div>
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-state">
+        No auditions scheduled yet.
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

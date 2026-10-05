@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Matches | CASTR
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+
+    <p class="eyebrow">
+        CASTING INTELLIGENCE
+    </p>
+
+    <h1>
+        Best Matches for {{ role.role_name }}
+    </h1>
+
+    <p>
+        {{ production.title if production else "" }}
+    </p>
+
+</section>
+
+
+<div class="match-layout">
+
+
+<div class="requirement-panel">
+
+    <h3>Role Requirements</h3>
+
+    <p>
+        Age:
+        {{ role.age_min }}–{{ role.age_max }}
+    </p>
+
+    <p>
+        Gender:
+        {{ role.gender }}
+    </p>
+
+    <p>
+        Location:
+        {{ role.location }}
+    </p>
+
+    <p>
+        Minimum Experience:
+        {{ role.minimum_experience }} years
+    </p>
+
+
+    <h4>Required Skills</h4>
+
+    {% for skill in role.required_skills %}
+
+        <div class="requirement">
+
+            {{ skill.name }}
+
+            <strong>
+                {{ skill.weight }}%
+            </strong>
+
+        </div>
+
+    {% endfor %}
+
+
+    <h4>Languages</h4>
+
+    {% for language in role.required_languages %}
+
+        <div class="requirement">
+
+            {{ language.name }}
+
+            <strong>
+                {{ language.weight }}%
+            </strong>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+
+<div class="ranking-panel">
+
+    <div class="ranking-title">
+
+        <div>
+
+            <p class="eyebrow">
+                RANKED CANDIDATES
+            </p>
+
+            <h2>
+                Compatibility Ranking
+            </h2>
+
+        </div>
+
+        <span>
+            {{ candidates|length }} eligible
+        </span>
+
+    </div>
+
+
+    {% for candidate in candidates %}
+
+    <div class="candidate-card">
+
+        <div class="rank">
+
+            #{{ loop.index }}
+
+        </div>
+
+
+        <div class="candidate-info">
+
+            <h2>
+                {{ candidate.name }}
+            </h2>
+
+            <p>
+                {{ candidate.age }} years •
+                {{ candidate.location }} •
+                {{ candidate.experience_years }}
+                years experience
+            </p>
+
+
+            <div class="score-details">
+
+            {% for item in candidate.breakdown %}
+
+                <span>
+
+                    {{ item.category }}:
+
+                    {{ item.score }}/{{ item.weight }}
+
+                </span>
+
+            {% endfor %}
+
+            </div>
+
+        </div>
+
+
+       <div class="match-score">
+
+    <strong>
+        {{ candidate.score }}%
+    </strong>
+
+    <span>
+        MATCH
+    </span>
+
+    <form
+        action="/apply/{{ role._id }}/{{ candidate._id }}"
+        method="POST">
+
+        <button
+            type="submit"
+            class="apply-button">
+
+            Apply
+
+        </button>
+
+    </form>
+
+</div>
+
+    </div>
+
+    {% else %}
+
+        <div class="empty-state">
+
+            No eligible actors found.
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+
+</div>
+
+{% endblock %}

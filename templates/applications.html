@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}
+Applications | CASTR
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+
+    <p class="eyebrow">CASTING MANAGEMENT</p>
+
+    <h1>Applications</h1>
+
+    <p>
+        Track actor applications and casting decisions.
+    </p>
+
+</section>
+
+
+<div class="ranking-panel">
+
+    <div class="ranking-title">
+
+        <div>
+            <p class="eyebrow">
+                APPLICATION DATABASE
+            </p>
+
+            <h2>Candidate Applications</h2>
+        </div>
+
+        <span>
+            {{ applications|length }} applications
+        </span>
+
+    </div>
+
+
+    {% for application in applications %}
+
+    <div class="candidate-card">
+
+        <div class="rank">
+            #{{ loop.index }}
+        </div>
+
+
+        <div class="candidate-info">
+
+            <h2>
+                {{ application.actor_name }}
+            </h2>
+
+            <p>
+                Applied for
+                <strong>
+                    {{ application.role_name }}
+                </strong>
+                •
+                {{ application.production_name }}
+            </p>
+
+
+            <div class="score-details">
+
+                <span>
+                    Match Score:
+                    {{ application.match_score }}%
+                </span>
+
+                <span>
+                    Status:
+                    {{ application.status }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="application-actions">
+
+            {% if application.status == "Applied" %}
+
+                <form
+                    action="/application/{{ application._id }}/status"
+                    method="POST">
+
+                    <button
+                        name="status"
+                        value="Shortlisted"
+                        class="small-green-button">
+
+                        Shortlist
+
+                    </button>
+
+                    <button
+                        name="status"
+                        value="Rejected"
+                        class="small-red-button">
+
+                        Reject
+
+                    </button>
+
+                </form>
+
+
+            {% elif application.status == "Shortlisted" %}
+
+                <form
+                    action="/schedule-audition/{{ application._id }}"
+                    method="POST">
+
+                    <button
+                        type="submit"
+                        class="small-green-button">
+
+                        Schedule Audition
+
+                    </button>
+
+                </form>
+
+
+            {% else %}
+
+                <strong class="status-text">
+                    {{ application.status }}
+                </strong>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    {% else %}
+
+        <div class="empty-state">
+            No applications yet.
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

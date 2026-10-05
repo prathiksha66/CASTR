@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}
+CASTR Dashboard
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hero">
+
+    <div class="badge">
+        INTELLIGENT CASTING PLATFORM
+    </div>
+
+    <h1>
+        Find the right actor.
+        <span>Faster.</span>
+    </h1>
+
+    <p>
+        CASTR uses database-driven compatibility scoring
+        to connect actors with the roles that fit them best.
+    </p>
+
+    <div class="hero-buttons">
+
+        <a href="/roles"
+           class="primary-button">
+            Explore Roles
+        </a>
+
+        <a href="/actors"
+           class="secondary-button">
+            View Talent
+        </a>
+
+    </div>
+
+</section>
+
+
+<section class="stats">
+
+    <div class="stat-card">
+
+        <h2>{{ actor_count }}</h2>
+
+        <p>Registered Actors</p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <h2>{{ role_count }}</h2>
+
+        <p>Open Roles</p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <h2>{{ production_count }}</h2>
+
+        <p>Productions</p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <h2>AI</h2>
+
+        <p>Compatibility Ranking</p>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <div class="section-header">
+
+        <p class="eyebrow">
+            HOW IT WORKS
+        </p>
+
+        <h2>
+            Casting powered by data
+        </h2>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="number">01</div>
+
+            <h3>Actor Profiles</h3>
+
+            <p>
+                Store skills, languages, experience,
+                previous roles and availability.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="number">02</div>
+
+            <h3>Role Requirements</h3>
+
+            <p>
+                Define the exact skills, languages and
+                experience required for every character.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="number">03</div>
+
+            <h3>Smart Matching</h3>
+
+            <p>
+                CASTR calculates weighted compatibility
+                scores and automatically ranks candidates.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

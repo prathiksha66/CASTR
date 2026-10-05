@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}
+Actors | CASTR
+{% endblock %}
+
+
+{% block content %}
+
+<section class="page-header">
+
+    <p class="eyebrow">
+        TALENT DATABASE
+    </p>
+
+    <h1>Actors</h1>
+
+    <p>
+        Browse registered talent and professional profiles.
+    </p>
+
+</section>
+
+
+<div class="actor-grid">
+
+{% for actor in actors %}
+
+    <div class="actor-card">
+
+        <div class="actor-top">
+
+            <div class="avatar">
+                {{ actor.name[0] }}
+            </div>
+
+            <div>
+
+                <h2>{{ actor.name }}</h2>
+
+                <p>
+                    {{ actor.age }} years •
+                    {{ actor.location }}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="experience">
+
+            {{ actor.experience_years }}
+            years experience
+
+        </div>
+
+
+        <h4>Skills</h4>
+
+        <div class="tags">
+
+            {% for skill in actor.skills %}
+
+                <span>
+                    {{ skill.name }}
+                    {{ skill.level }}/5
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+
+        <h4>Languages</h4>
+
+        <div class="tags">
+
+            {% for language in actor.languages %}
+
+                <span>
+                    {{ language.name }}
+                </span>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% if actor.available %}
+
+            <div class="available">
+                ● Available
+            </div>
+
+        {% else %}
+
+            <div class="unavailable">
+                ● Unavailable
+            </div>
+
+        {% endif %}
+
+    </div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

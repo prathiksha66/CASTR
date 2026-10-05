@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics | CASTR{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <p class="eyebrow">DATABASE INTELLIGENCE</p>
+
+    <h1>Analytics Dashboard</h1>
+
+    <p>
+        Real-time insights generated from MongoDB collections
+        and aggregation pipelines.
+    </p>
+</section>
+
+
+<div class="analytics-grid">
+
+    <div class="analytics-card">
+        <h3>Actors</h3>
+        <div class="analytics-number">{{ total_actors }}</div>
+        <p>Registered talent</p>
+    </div>
+
+    <div class="analytics-card">
+        <h3>Roles</h3>
+        <div class="analytics-number">{{ total_roles }}</div>
+        <p>Casting roles</p>
+    </div>
+
+    <div class="analytics-card">
+        <h3>Productions</h3>
+        <div class="analytics-number">{{ total_productions }}</div>
+        <p>Active productions</p>
+    </div>
+
+    <div class="analytics-card">
+        <h3>Applications</h3>
+        <div class="analytics-number">{{ total_applications }}</div>
+        <p>Candidate applications</p>
+    </div>
+
+    <div class="analytics-card">
+        <h3>Auditions</h3>
+        <div class="analytics-number">{{ total_auditions }}</div>
+        <p>Scheduled auditions</p>
+    </div>
+
+    <div class="analytics-card">
+        <h3>Evaluations</h3>
+        <div class="analytics-number">{{ total_evaluations }}</div>
+        <p>Completed evaluations</p>
+    </div>
+
+</div>
+
+
+<div class="analytics-section">
+
+    <p class="eyebrow">MATCHING INTELLIGENCE</p>
+    <h2>Compatibility Score Statistics</h2>
+
+    <div class="analytics-grid">
+
+        <div class="analytics-card">
+            <h3>Average Score</h3>
+            <div class="analytics-number">
+                {{ average_score }}%
+            </div>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Highest Score</h3>
+            <div class="analytics-number">
+                {{ highest_score }}%
+            </div>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Lowest Score</h3>
+            <div class="analytics-number">
+                {{ lowest_score }}%
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="analytics-section">
+
+    <p class="eyebrow">MONGODB AGGREGATION</p>
+    <h2>Application Status Distribution</h2>
+
+    <div class="status-list">
+
+        {% for item in status_results %}
+
+        <div class="status-row">
+
+            <span>
+                {{ item._id }}
+            </span>
+
+            <strong>
+                {{ item.count }}
+            </strong>
+
+        </div>
+
+        {% else %}
+
+        <p>No application data available.</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
